@@ -7,13 +7,13 @@ var form = require('form-urlencoded')
 var fs = require("fs")
 
 
-test ("check if tests installed properly", function(t) {
+test ("1 >> check if tests installed properly", function(t) {
   t.pass()
   t.end()
 })
 
 
-test("if first site is rendered correctly", function(t) {
+test("2 >> if first site is rendered correctly", function(t) {
   request(server)
   .get("/")
   .end(function(err, res) {
@@ -27,7 +27,7 @@ t.end()
 })
 
 
-test("checking if complimentPage renders nickname", function(t) {
+test("3 >> checking if complimentPage renders nickname", function(t) {
   var data = {userName: "Bob", nickname: "Olo"}
   var data_encoded = form(data)
 
@@ -51,8 +51,24 @@ test("checking if complimentPage renders nickname", function(t) {
 })
 
 
+test ("4 >> testing home page sends hello world", function (t) {
+  request(server)
+  .get("/")
+  .end(function(err, res) {
+    if (err) throw err
 
-test("posted parameters appears on page", function(t) {
+    var $ = cheerio.load(res.text)
+    var expected = "Text 1 index page"
+    var actual = $(".h1text").text()
+    console.log(actual);
+
+    t.equal(actual, expected )
+    t.end()
+  })
+})
+
+/// MAGDA I ANIA W NIEDZIELE:
+test("5 >> posted parameters appears on page", function(t) {
   //arrange
   var data = {userName: "Ela", nickname: "Ania"}
   var formData = form(data)
@@ -70,24 +86,3 @@ test("posted parameters appears on page", function(t) {
     t.end()
   })
 })
-
-
-
-
-
-//
-// test ("testing home page sends hello world", function (t) {
-//   request(server)
-//   .get("/")
-//   .end(function(err, res) {
-//     if (err) throw err
-//
-//     var $ = cheerio.load(res.text)
-//     var expected = "Text 1 index page"
-//     var actual = $(".h1text").text()
-//     console.log(actual);
-//
-//     t.equal(actual, expected )
-//     t.end()
-//   })
-// })
