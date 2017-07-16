@@ -2,7 +2,7 @@ var test = require('tape')
 var request = require('supertest')
 var cheerio = require('cheerio')
 var server = require('../server')
-var form = require('form-urlencoded')
+// var form = require('form-urlencoded')
 
 var fs = require("fs")
 
@@ -16,6 +16,7 @@ test ("1 >> check if tests installed properly", function(t) {
 test("2 >> if first site is rendered correctly", function(t) {
   request(server)
   .get("/")
+
   .end(function(err, res) {
     if (err) throw err
 var $ = cheerio.load(res.text)
@@ -54,13 +55,12 @@ test("3 >> checking if complimentPage renders nickname", function(t) {
 test ("4 >> testing home page sends hello world", function (t) {
   request(server)
   .get("/")
+
   .end(function(err, res) {
     if (err) throw err
-
     var $ = cheerio.load(res.text)
-    var expected = "Text 1 index page"
+    var expected = "Nice Page"
     var actual = $(".h1text").text()
-    console.log(actual);
 
     t.equal(actual, expected )
     t.end()
@@ -69,20 +69,20 @@ test ("4 >> testing home page sends hello world", function (t) {
 
 /// MAGDA I ANIA W NIEDZIELE:
 test("5 >> posted parameters appears on page", function(t) {
-  //arrange
+
   var data = {userName: "Ela", nickname: "Ania"}
-  var formData = form(data)
+  // var formData = form(data) -- to jednak niepotrzebne bo orkrylismy ze .type("form") mowi ze to co jest wyslane w .send musi byc w urlencoded - formacie w ktorym przegladarka wysyla formularz
   request(server)
-  .post("/compliment") //request do servera
-  .send(formData)      //request do servera
-  //act
+  .post("/compliment")
+  .type("form")
+  .send(data)
   .end(function(err, res) {   //uruchomie requesta i wyslanie response
   //assert (sprawdzanie wynikow)
     if (err) throw err
     var $ = cheerio.load(res.text)
     var expected = " " + data.userName + " is pretty!"
     var actual = $('h1').text()
-    t.equal(actual, expected) //uruchamia test
+    t.equal(actual, expected) 
     t.end()
   })
 })
