@@ -1,0 +1,29 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape tests/**/*.test.js | tap-diff",
+    "start": "nodemon index --ignore data.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "form-urlencoded": "^2.0.0",
+    "fs": "0.0.1-security",
+    "handlebars": "^4.0.10",
+    "heroku": "^0.2.0",
+    "nodemon": "^1.11.0",
+    "router": "^1.3.1",
+    "supertest": "^3.0.0",
+    "tape": "^4.7.0"
+  },
+  "devDependencies": {
+    "tap-diff": "^0.1.1"
+  }
+}
