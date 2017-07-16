@@ -1,3 +1,12 @@
 body {
   font-family: 'Fresca', sans-serif;
+  text-align: center;
+}
+
+.footer {
+  margin-top: 200px;
+}
+
+.submitButton {
+  background-color: yellow;
 }
