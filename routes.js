@@ -14,9 +14,6 @@ router.get('/who', function(req, res) {
 })
 
 router.post('/compliment', function(req, res) {
-var name = {
-  userName: req.body.userName
-}
-
+var name = req.body
 res.render('complimentPage',name)
 })
