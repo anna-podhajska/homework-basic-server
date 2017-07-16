@@ -50,4 +50,4 @@ res.render('complimentPage',name)
 //   })
   // data.dupa = "dupadupa"
 
-})
+// })
